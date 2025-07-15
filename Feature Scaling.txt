@@ -1,0 +1,45 @@
+Feature scaling ensures that all features contribute equally to the model’s learning, especially for distance- and gradient-based algorithms.
+
+- Feature scaling is always applied to columns not rows
+
+- There are two types of feature scaling-
+    - Normalization - Values are compressed between 0 and 1
+    - Standardization - Value are compressed between -3 and 3 (outliers can be outside this boundaries)
+
+
+
+    | Aspect       | **Standardization**                          | **Normalization**                                     |
+| ------------ | -------------------------------------------- | ----------------------------------------------------- |
+| Formula      | $z = \frac{x - \mu}{\sigma}$                 | $x' = \frac{x - \text{min}}{\text{max} - \text{min}}$ |
+| Output Range | Mean = 0, Std = 1 (not bounded)              | \[0, 1]                                               |
+| Use Cases    | Linear models, SVM, PCA, Logistic Regression | Neural networks, k-NN, Min-max bounded input          |
+| When to Use  | When features follow Gaussian distribution   | When features have different scales and bounds        |
+
+
+
+Great question. Here's **why**:
+
+---
+
+### ✅ **Why Standardization (Z-score) is used for algorithms assuming normal distribution:**
+
+* Algorithms like **Linear Regression**, **Logistic Regression**, **SVM**, and **PCA** assume or perform better when data is **centered around 0 with unit variance**.
+* **Standardization** makes the data **mean = 0 and std = 1**, aligning with assumptions of many statistical models and improving convergence in gradient descent.
+* It **preserves outliers** and does **not compress the range**, which is helpful when outliers are meaningful.
+
+---
+
+### ✅ **Why Normalization (Min-Max Scaling) is better for distance/gradient-based algorithms:**
+
+* **k-NN, K-Means, and Neural Networks** rely heavily on **distance calculations** (like Euclidean distance) or **gradient updates**.
+* Features on larger scales would **dominate** the distance or gradient if not scaled, skewing results.
+* **Normalization bounds data to \[0, 1]**, making each feature contribute **equally** and helping in **faster, stable convergence**, especially in **Neural Networks** where activations like sigmoid/tanh expect bounded input.
+
+---
+
+### Summary:
+
+| Scaling Type        | Why Use It                                                                                             |
+| ------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Standardization** | Centers & scales data for models assuming normal distribution (e.g., SVM, PCA)                         |
+| **Normalization**   | Makes all features equal in scale for distance-based models (e.g., k-NN) and gradient-friendly for NNs |

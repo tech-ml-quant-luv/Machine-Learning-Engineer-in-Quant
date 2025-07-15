@@ -1,0 +1,5 @@
+Splitting the data means getting some of our data out of the data set for the tesing purpose once the model is trained on the training set.
+
+- We have Training set (60-70%)
+- We have cross-valiation set (10-20%) 
+- We have Test set (10-20%)

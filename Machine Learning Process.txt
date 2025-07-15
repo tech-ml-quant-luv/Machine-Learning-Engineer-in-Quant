@@ -1,0 +1,13 @@
+There are 3 steps in the Machine Learning Process
+
+- Data Pre-Processing
+    - Importing the Data
+    - Clean the Data
+    - Split into training and test steps
+- Modelling
+    - Build the Model
+    - Train the Model
+    - Make predictions
+- Evaluation
+    - Calculate performance metrics
+    - Make a verdict
