@@ -1,0 +1,19 @@
+- When we have less missing data, we can just remove the fields from the data
+
+
+- When we have too much missing data, we do this - 
+
+
+| Scenario                       | Data Type       | Missing %              | Method                                                                    | When to Use                                                    | Example                    |
+| ------------------------------ | --------------- | ---------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------- |
+| **Drop Rows**                  | Any             | 🔽 Low (<5%)           | `df.dropna()`                                                             | When losing a few rows doesn't affect data quality             | Small surveys, test logs   |
+| **Drop Columns**               | Any             | 🔼 High (>40–50%)      | `df.dropna(axis=1)`                                                       | When column is mostly missing and not essential                | Deprecated feature column  |
+| **Fill with Mean/Median**      | Numeric         | 🟡 Medium              | `SimpleImputer(strategy='mean')` or `.fillna(df.mean())`                  | When data is symmetric (mean) or skewed (median)               | Income, test scores        |
+| **Fill with Mode**             | Categorical     | 🟡 Medium              | `SimpleImputer(strategy='most_frequent')` or `.fillna(df.mode().iloc[0])` | For frequent categories like gender, product type              | Gender = Male/Female       |
+| **Fill with Constant**         | Any             | Any                    | `SimpleImputer(strategy='constant', fill_value=...)`                      | When you want a placeholder (e.g., `"Unknown"`, `0`)           | Address = "Unknown"        |
+| **Forward/Backward Fill**      | Time Series     | Varies                 | `.fillna(method='ffill')` / `bfill`                                       | For continuous time series where last/next value is meaningful | Stock prices, weather data |
+| **Group-based Fill**           | Numeric or Cat. | Any                    | `groupby().transform()`                                                   | When value can be imputed within group (e.g., per category)    | Fill salary by department  |
+| **KNNImputer**                 | Numeric         | 🟡 Medium              | `KNNImputer`                                                              | When similar data points can help infer missing values         | Customer profiling         |
+| **IterativeImputer**           | Numeric         | 🔼 High (complex data) | `IterativeImputer`                                                        | When values depend on multiple features                        | Healthcare, finance        |
+| **Encode Missing as Category** | Categorical     | 🔼 High or Informative | `.fillna('Missing')`                                                      | When missingness has meaning or might affect target            | Credit history = "Unknown" |
+| **Keep as NaN**                | Any             | Any                    | Leave as-is                                                               | Some models (like XGBoost) handle NaNs internally              | Tree-based models          |
