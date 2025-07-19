@@ -3,3 +3,6 @@ Splitting the data means getting some of our data out of the data set for the te
 - We have Training set (60-70%)
 - We have cross-valiation set (10-20%) 
 - We have Test set (10-20%)
+- We have to apply feature scaling after splitting data into training set and the test set.
+    - This is because the training set is a brand new set in which we are going to deploy our machine learning model on.
+    - If we will apply the feature scaling before the split, then it will actually get the mean and the standard deviation of all the values including the ones in the test set. And since the test set is something we are not supposed to have, like some future data in production, applying feature scaling before the split will cause a data leakage or information leakage. We leaked some information from the training set to the test set which can make our model biased towards the test set.

@@ -1,4 +1,6 @@
 Feature scaling ensures that all features contribute equally to the model’s learning, especially for distance- and gradient-based algorithms.
+This is done becuase features in a machine learning model can vary a lot. They can range from 0 to 1 or 100 to 1000 or 10k to 100k. Because of this the model thinks that the feature with the higher number can be of greater significance and this significance has a high chances of being wrong. So to bring all the features in one standard scale, feature scaling is done.
+- This is not a necessity to apply feature scaling for all the machine learning models
 
 - Feature scaling is always applied to columns not rows
 
@@ -6,6 +8,16 @@ Feature scaling ensures that all features contribute equally to the model’s le
     - Normalization - Values are compressed between 0 and 1
     - Standardization - Value are compressed between -3 and 3 (outliers can be outside this boundaries)
 
+
+!IMPORTANT -  The feature scaling should not be done using fit on the training data and transform in the test data. If we use fit_transform() directly on the test data, that is a serious data leakage issue.
+Therefore we use the same scaler on the test set as the training set.
+- Use fit_Transform on training data, that will initialize the scaler
+- Use the same scaler on the test data using transform
+
+
+- Normalization works best when we have normal distribution in our data.
+- Standardization will work all the time.
+- Do not apply dummy variable on dummy variables that are resulted from one hot encoding or label encoding
 
 
     | Aspect       | **Standardization**                          | **Normalization**                                     |
